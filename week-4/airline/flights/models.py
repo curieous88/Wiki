@@ -1,14 +1,16 @@
 from django.db import models
 
-# Create your models here.
+# Create your models here. [This is basically a table in django]
 class Flight(models.Model):
     origin = models.CharField(max_length=64)
     destination = models.CharField(max_length=64)
-    duration = models.IntegerField() 
 
-def __str__(self):
-    return f"{self:id} : {self.origin} to {self.destination}"   
-    
+
+    def __str__(self):
+        return f"{self.id} : {self.origin} to {self.destination}"
+
+
+
     
 
 
