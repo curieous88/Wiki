@@ -3,9 +3,16 @@ from .models import Flight, Airport
 
 # Create your views here.
 
-def flights(request):  
+def index(request):  
        return render(request, "flights/index.html", {
          "flights": Flight.objects.all()  
        })
+
+def flightinfo(request,flight_id):  
+      flight=Flight.objects.get(id=flight_id)
+      return render(request, "flights/flightinfo.html", {
+         "flightinfo": flight
+       })
+    
     
 
