@@ -6,8 +6,22 @@
         <li>Origin: {{ flightinfo.origin }}</li>
         <li>Destination: {{ flightinfo.destination }}</li>
         <li>Duration: {{ flightinfo.duration }} minutes</li>
+        <li> Passenger details : </li>
     </ul>
 
-    <a href="{% url 'index' %}">All Flights</a>
+    <h2>Passengers details :</h2>
+    <ul>
+        {% for passenger in passengers %}
+           <li>{{ passenger }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add Passengers :</h2>
+    <form method="post">
+        <input type="submit">
+    </form>
+
+    <a href="{% url 'flights' %}">All Flights</a>
+    {% comment %} Here "flights" is the name given to query set not the html page {% endcomment %}
     
 {% endblock %}
