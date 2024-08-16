@@ -17,8 +17,14 @@
     </ul>
 
     <h2>Add Passengers :</h2>
-    <form method="post">
-        <input type="submit">
+    <form>
+        {% comment %} {% csrf_token %}  {% endcomment %}
+        <select>
+            {% for passenger in passengers %}
+                <option value={{ passenger.first }}>{{ passenger }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Add Passenger">
     </form>
 
     <a href="{% url 'flights' %}">All Flights</a>

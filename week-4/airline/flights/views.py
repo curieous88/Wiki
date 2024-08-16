@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Flight, Airport, Passenger
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -15,6 +16,12 @@ def flightinfo(request,flight_id):
          "flightinfo": flight,
          "passengers": flight.passengers.all()
        })
+      
+# def book(request, flight_id):
+#   if request.method == "POST":
+#     flight=Flight.objects.get(flight_id)
+#     return HttpResponseRedirect
+    
       
 
 
