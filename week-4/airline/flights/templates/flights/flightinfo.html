@@ -19,9 +19,10 @@
     <h2>Add Passengers :</h2>
     <form>
         {% comment %} {% csrf_token %}  {% endcomment %}
-        <select>
+        <select multiple>
             {% for passenger in passengers %}
-                <option value={{ passenger.first }}>{{ passenger }}</option>
+                <option selected value={{ passenger.first }}>{{ passenger }}</option>
+                {% comment %} travellers == flight.passengers.all() {% endcomment %}
             {% endfor %}
         </select>
         <input type="submit" value="Add Passenger">
