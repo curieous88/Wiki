@@ -11,7 +11,7 @@
 
     <h2>Passengers details :</h2>
     <ul>
-        {% for passenger in passengers %}
+        {% for passenger in passengers_in_flight %}
            <li>{{ passenger }}</li>
         {% endfor %}
     </ul>
@@ -20,15 +20,17 @@
     <form>
         {% comment %} {% csrf_token %}  {% endcomment %}
         <select multiple>
-            {% for passenger in passengers %}
-                <option selected value={{ passenger.first }}>{{ passenger }}</option>
-                {% comment %} travellers == flight.passengers.all() {% endcomment %}
+            {% for passenger in passengers_in_flight %}
+                <option selected value="{{ passenger.first }}">{{ passenger }}</option>
             {% endfor %}
-        </select>
+            {% for passenger in passengers_all %}
+                {% if passenger not in passengers_in_flight %}
+                    <option value="{{ passenger.first }}">{{ passenger }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>        
         <input type="submit" value="Add Passenger">
     </form>
-
     <a href="{% url 'flights' %}">All Flights</a>
-    {% comment %} Here "flights" is the name given to query set not the html page {% endcomment %}
-    
+    {% comment %} Here "flights" is the name given to query set not the html page {% endcomment %}    
 {% endblock %}
