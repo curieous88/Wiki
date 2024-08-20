@@ -17,9 +17,9 @@
     </ul>
 
     <h2>Add Passengers :</h2>
-    <form>
-        {% comment %} {% csrf_token %}  {% endcomment %}
-        <select multiple>
+    <form "{% url 'add_passengers_to_flight' flight.id %}" method="POST">
+        {% csrf_token %} 
+        <select name="add_passengers" multiple>
             {% for passenger in passengers_in_flight %}
                 <option selected value="{{ passenger.first }}">{{ passenger }}</option>
             {% endfor %}
