@@ -14,7 +14,7 @@ def index(request):
 
 def flightinfo(request,flight_id):  
       flight=Flight.objects.get(id=flight_id)
-      print("flight id is:" , flight_id)  # This should output the correct ID  
+      # print("flight id is:" , flight_id)  # This should output the correct ID  
       return render(request, "flights/flightinfo.html", {
          "flightinfo": flight,
          "passengers_all": Passenger.objects.all().order_by('first'),
@@ -26,6 +26,7 @@ def add_passengers_to_flight(request, flight_id):
     flight=Flight.objects.get(id=flight_id)
     print("ftttfffflight id is:" , flight_id, flight.id, flight)  # This should output the correct ID  
     if request.method == 'POST':
+      print("passenger id is:" , passenger)  # This should output the correct ID  
       selected_passenger = int(request.POST["passenger"])
       print("list id is:" , selected_passenger)  # This should output the correct ID  
       add_passengers = Passenger.objects.get(pk=selected_passenger)
