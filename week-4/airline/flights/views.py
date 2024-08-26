@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Flight, Airport, Passenger
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -24,16 +24,16 @@ def flightinfo(request,flight_id):
       
 def add_passengers_to_flight(request, flight_id):
     flight=Flight.objects.get(id=flight_id)
-    print("ftttfffflight id is:" , flight_id, flight.id, flight)  # This should output the correct ID  
-    if request.method == 'POST':
-      print("passenger id is:" , passenger)  # This should output the correct ID  
-      selected_passenger = int(request.POST["passenger"])
-      print("list id is:" , selected_passenger)  # This should output the correct ID  
-      add_passengers = Passenger.objects.get(pk=selected_passenger)
-      print("passen id is:" , add_passengers)  # This should output the correct ID 
-      passenger.flights.add(flight) 
-      # for passenger in add_passengers:
-      #   flight.passengers.add(passenger)    
+    print("test flight id is:" , flight_id, flight.id, flight)  # This should output the correct ID  
+    if request.method == "POST":
+      selected_passengers = request.POST.getlist("add_passengers")  # Get a list of selected passenger IDs
+      print("Selected passenger IDs:", selected_passengers)  # Debug output
+      for selected_passenger_id in selected_passengers:
+          selected_passenger = get_object_or_404(Passenger, pk=int(selected_passenger_id))
+          print("Test passenger ID is:", selected_passenger_id)
+          # Add the passenger to the flight or perform any other necess
+          flight.passengers.add(selected_passenger)    
+      flight.save()
       return HttpResponseRedirect(reverse("add_passengers_to_flight", args=[flight.id]))
     else:
       return render(request, "flights/flightinfo.html", {
