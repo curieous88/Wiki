@@ -14,4 +14,4 @@ def login_view(request):
 
 def logout_view(request):
     # Pass is a simple way to tell python to do nothing.
-    pass
+    
